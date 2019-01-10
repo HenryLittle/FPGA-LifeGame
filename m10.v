@@ -454,7 +454,7 @@ module envolve_logic (
                 //     end
                 // end
                 always @ (posedge clk) begin
-                    if (~ pre_evo_clk[i][j] & clk_envo & change_state) begin
+                    if (~ pre_evo_clk[i][j] & clk_envo) begin
                         if (map_index == 0) begin
                         // read from map a and wirte to map b
                             
