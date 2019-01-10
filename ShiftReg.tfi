@@ -1,0 +1,11 @@
+
+
+
+// Instantiate the module
+ShiftReg instance_name (
+    .clk(clk), 
+    .pdata(pdata), 
+    .sout(sout)
+    );
+
+

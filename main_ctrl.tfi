@@ -1,0 +1,16 @@
+
+
+
+// Instantiate the module
+main_ctrl instance_name (
+    .clk(clk), 
+    .rst(rst), 
+    .ps2_byte(ps2_byte), 
+    .ps2_state(ps2_state), 
+    .win_ctrl_cmd(win_ctrl_cmd), 
+    .envo_ctrl_cmd(envo_ctrl_cmd), 
+    .view_width(view_width), 
+    .mode(mode)
+    );
+
+

@@ -1,0 +1,181 @@
+Release 14.7 - par P.20131013 (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+
+Thu Jan 10 10:03:49 2019
+
+  SmartGuide Results
+  ------------------
+  This section describes the guide results after invoking the Router. This
+  report accurately reflects the differences between the input design
+  and the guide design.
+
+  Number of Components in the input design    |    646
+    Number of guided Components               |    634 out of    646  98.1%
+    Number of re-implemented Components       |      5 out of    646   0.8%
+    Number of new/changed Components          |      7 out of    646   1.1%
+  Number of Nets in the input design          |   2168
+    Number of guided Nets                     |   2039 out of   2168  94.0%
+    Number of partially guided Nets           |     65 out of   2168   3.0%
+    Number of re-routed Nets                  |     55 out of   2168   2.5%
+    Number of new/changed Nets                |      9 out of   2168   0.4%
+
+
+The following Components were re-implemented.
+---------------------------------------------
+ segDevice/U2/shift<62> : SLICE_X5Y71.
+ envolve/wAddrR<1> : SLICE_X18Y71.
+ envolve/wAddrC<0> : SLICE_X25Y71.
+ envolve/evo_logic/_n9580_inv : SLICE_X29Y87.
+ envolve/evo_ctrl/evo_ctrl/count<4> : SLICE_X30Y87.
+
+
+The following Components are new/changed.
+-----------------------------------------
+ segDevice/U2/shift<63> : SLICE_X7Y71.
+ segDevice/U2/shift<49> : SLICE_X11Y69.
+ segDevice/U2/shift<52> : SLICE_X10Y69.
+ segDevice/U2/shift<58> : SLICE_X10Y70.
+ segDevice/U2/shift<40> : SLICE_X13Y69.
+ segDevice/U2/shift<36> : SLICE_X12Y69.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd378 : SLICE_X17Y68.
+
+
+The following Nets were re-routed.
+----------------------------------
+ envo_ctrl_cmd<4>.
+ envolve/evo_logic/GND_3_o_GND_3_o_equal_109_o<6>1.
+ envolve/evo_logic/_n9580_inv.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd378.
+ segDevice/U2/shift<39>.
+ segDevice/U2/shift<32>.
+ segDevice/U2/shift<40>.
+ envolve/evo_ctrl/evo_ctrl/n0043[25:0]<20>.
+ envolve/evo_ctrl/evo_ctrl/n0043[25:0]<1>.
+ envolve/evo_ctrl/evo_ctrl/count<20>.
+ envolve/evo_ctrl/evo_ctrl/count<1>.
+ envolve/evo_ctrl/evo_ctrl/n0043[25:0]<5>.
+ envolve/evo_ctrl/evo_ctrl/n0043[25:0]<4>.
+ envolve/evo_ctrl/evo_ctrl/count<5>.
+ envolve/evo_ctrl/evo_ctrl/count<4>.
+ envolve/evo_ctrl/evo_ctrl/n0043[25:0]<3>.
+ envolve/evo_ctrl/evo_ctrl/n0043[25:0]<2>.
+ envolve/evo_ctrl/evo_ctrl/count<3>.
+ envolve/evo_ctrl/evo_ctrl/count<2>.
+ segDevice/U2/shift<47>.
+ segDevice/U2/shift<55>.
+ segDevice/U2/shift<48>.
+ segDevice/U2/shift<56>.
+ N74.
+ N22.
+ segDevice/U2/shift<52>.
+ segDevice/U2/shift<53>.
+ segDevice/U2/shift<38>.
+ segDevice/U2/shift<49>.
+ segDevice/U2/shift<50>.
+ segDevice/U2/shift<36>.
+ segDevice/U2/shift<37>.
+ N4.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd605_lut<0>.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd604_cy<0>.
+ envolve/evo_ctrl/evo_ctrl/count<0>.
+ envolve/evo_ctrl/evo_ctrl/n0043[25:0]<0>.
+ segDevice/U2/shift<46>.
+ segDevice/U2/shift<45>.
+ segDevice/U2/shift<44>.
+ segDevice/U2/shift<43>.
+ segDevice/U2/shift<42>.
+ segDevice/U2/shift<41>.
+ segDevice/U2/shift<51>.
+ segDevice/U2/shift<35>.
+ segDevice/U2/shift<34>.
+ segDevice/U2/shift<33>.
+ segDevice/U2/shift<54>.
+ segDevice/U2/shift<57>.
+ segDevice/U2/shift<58>.
+ segDevice/U2/shift<63>.
+ segDevice/U2/shift<62>.
+ segDevice/U2/shift<61>.
+ segDevice/U2/shift<59>.
+ segDevice/U2/shift<60>.
+
+
+The following Nets are new/changed.
+-----------------------------------
+ wAddrR<1>.
+ wAddrR<0>.
+ wAddrR<2>.
+ _n0055.
+ wAddrC<1>.
+ wAddrC<2>.
+ wAddrC<0>.
+ wAddrC<3>.
+ wAddrR<3>.
+
+
+The following Nets were partially guided.
+-----------------------------------------
+ mainCtrl/mode.
+ count_3_BUFG.
+ envolve/evo_ctrl/evo_ctrl/Mcompar_envolve_v_cy<4>.
+ envolve/evo_ctrl/evo_s_ctrl/current_state_FSM_FFd1.
+ envolve/evo_logic/map_b<0>_6.
+ envolve/evo_logic/map_b<7>_7.
+ envolve/evo_logic/_n8644_inv2.
+ ps2/ps2_byte<2>.
+ ps2/ps2_byte<6>.
+ ps2/ps2_byte<7>.
+ clk_BUFGP.
+ SW<15>_inv.
+ envolve/evo_logic/map_a<6>_3.
+ envolve/evo_logic/map_a<1>_7.
+ envolve/evo_logic/map_a<1>_6.
+ segDevice/U2/sckEn.
+ segDevice/U2/_n0033_inv.
+ segDevice/U2/shift<31>.
+ envolve/evo_logic/map_b<7>_0.
+ envolve/evo_logic/map_b<7>_6.
+ envolve/evo_logic/map_b<0>_7.
+ envolve/evo_logic/map_b<0>_0.
+ envolve/evo_logic/map_b<1>_0.
+ envolve/evo_logic/map_b<1>_7.
+ envolve/evo_logic/_n8636_inv2.
+ envolve/cell_x<0>.
+ envolve/evo_logic/_n9404_inv1.
+ envolve/evo_logic/map_b<1>_6.
+ ps2/ps2_byte<3>.
+ envolve/evo_logic/map_a<0>_4.
+ ps2/ps2_byte<1>.
+ envolve/evo_logic/map_a<1>_4.
+ envolve/cur_y<3>.
+ envolve/cur_y<4>.
+ envolve/evo_logic/_n9412_inv1.
+ envolve/evo_ctrl/trav_core/addrR<0>.
+ envolve/evo_ctrl/trav_core/addrR<1>.
+ envolve/evo_ctrl/trav_core/addrR<2>.
+ envolve/evo_ctrl/evo_ctrl/count<22>.
+ envolve/evo_ctrl/evo_ctrl/count<21>.
+ envolve/evo_ctrl/evo_ctrl/count<7>.
+ envolve/evo_ctrl/evo_ctrl/count<6>.
+ envolve/evo_ctrl/evo_ctrl/count<8>.
+ envolve/cur_y<5>.
+ envolve/cur_y<6>.
+ envolve/cur_x<0>.
+ envolve/cur_x<2>.
+ envolve/evo_ctrl/evo_ctrl/step<1>.
+ envolve/evo_logic/write_en_GND_3_o_AND_100_o1.
+ envolve/evo_logic/_n9532_inv1.
+ envolve/evo_ctrl/trav_core/addrC<2>.
+ envolve/evo_ctrl/trav_core/addrC<0>.
+ envolve/evo_logic/_n9276_inv1.
+ envolve/cur_y<0>.
+ envolve/cur_y<2>.
+ envolve/cur_y<1>.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd303_lut<0>1.
+ envolve/evo_ctrl/evo_ctrl/count<23>.
+ segDevice/U2/shift<11>.
+ segDevice/U2/shift<9>.
+ segDevice/U2/shift<6>.
+ segDevice/U2/shift<4>.
+ segDevice/U2/shift<3>.
+ segDevice/U2/shift<1>.
+ envolve/evo_logic/_n8644_inv1.

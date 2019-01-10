@@ -1,0 +1,11 @@
+
+
+
+// Instantiate the module
+ps2_parser instance_name (
+    .clk(clk), 
+    .ps2_byte(ps2_byte), 
+    .keys(keys)
+    );
+
+
