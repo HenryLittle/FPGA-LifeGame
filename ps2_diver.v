@@ -96,12 +96,12 @@ module PS2_driver(
             else begin
                 if (!key_f0) begin
                     ps2_state <= 1'b1;
-                    ps2_byte <= ps2_temp;
                 end
                 else begin
                     ps2_state <= 1'b0;
                     key_f0 <= 1'b0;
                 end
+                ps2_byte <= ps2_temp;
             end
         end
     end

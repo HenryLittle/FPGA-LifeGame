@@ -4,7 +4,7 @@
 // Company: 
 // Engineer:
 //
-// Create Date:   13:43:11 01/10/2019
+// Create Date:   19:18:51 01/10/2019
 // Design Name:   envolve_ctrl
 // Module Name:   C:/Users/32882/Documents/ISE/GameOfLife/ev_test.v
 // Project Name:  GameOfLife
@@ -72,16 +72,17 @@ module ev_test;
 		// Wait 100 ns for global reset to finish
 		#100;
 		rst = 1;
-		envo_ctrl_cmd[5] = 1;
-		# 100;
-		envo_ctrl_cmd[5] = 0;
+		mode = 0;
+		envo_ctrl_cmd[6] = 1;
+		#50;
+		envo_ctrl_cmd[6] = 0;
         
 		// Add stimulus here
 
 	end
 	always begin
-		clk = 1; # 20;
-		clk = 0; # 20;
+		clk = 1;# 20;
+		clk = 0;# 20;
 	end
       
 endmodule

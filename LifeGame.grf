@@ -1,7 +1,7 @@
 Release 14.7 - par P.20131013 (nt64)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-Thu Jan 10 16:09:49 2019
+Thu Jan 10 20:24:04 2019
 
   SmartGuide Results
   ------------------
@@ -9,32 +9,480 @@ Thu Jan 10 16:09:49 2019
   report accurately reflects the differences between the input design
   and the guide design.
 
-  Number of Components in the input design    |   1870
-    Number of guided Components               |   1870 out of   1870 100.0%
-    Number of re-implemented Components       |      0 out of   1870   0.0%
-    Number of new/changed Components          |      0 out of   1870   0.0%
-  Number of Nets in the input design          |   5983
-    Number of guided Nets                     |   5983 out of   5983 100.0%
-    Number of partially guided Nets           |      0 out of   5983   0.0%
-    Number of re-routed Nets                  |      0 out of   5983   0.0%
-    Number of new/changed Nets                |      0 out of   5983   0.0%
+  Number of Components in the input design    |   1950
+    Number of guided Components               |   1920 out of   1950  98.5%
+    Number of re-implemented Components       |     17 out of   1950   0.9%
+    Number of new/changed Components          |     13 out of   1950   0.7%
+  Number of Nets in the input design          |   5998
+    Number of guided Nets                     |   5580 out of   5998  93.0%
+    Number of partially guided Nets           |    141 out of   5998   2.4%
+    Number of re-routed Nets                  |    251 out of   5998   4.2%
+    Number of new/changed Nets                |     26 out of   5998   0.4%
 
 
 The following Components were re-implemented.
 ---------------------------------------------
+ envolve/evo_ctrl/evo_s_ctrl/current_state_FSM_FFd3 : SLICE_X44Y200.
+ envolve/evo_ctrl/clear_en_pattern_en_OR_545_o : SLICE_X49Y200.
+ envolve/evo_logic/map_b<0>_0 : SLICE_X53Y211.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd318 : SLICE_X53Y217.
+ envolve/evo_logic/_n35672_inv : SLICE_X55Y217.
+ envolve/evo_logic/rAddrC[3]_map_b[15][11]_Mux_6679_o : SLICE_X57Y216.
+ N151 : SLICE_X56Y217.
+ envolve/evo_logic/_n35456_inv : SLICE_X58Y218.
+ envolve/evo_logic/_n37886_inv : SLICE_X59Y216.
+ envolve/cur_ctrl/rst_inv : SLICE_X61Y191.
+ envolve/evo_logic/map_a<2>_2 : SLICE_X60Y218.
+ ps2/key_f0 : SLICE_X62Y188.
+ ps2/ps2_state : SLICE_X62Y190.
+ envolve/evo_logic/_n35438_inv : SLICE_X62Y221.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd988 : SLICE_X65Y191.
+ envolve/evo_logic/_n35462_inv : SLICE_X69Y221.
+ envolve/evo_logic/_n38042_inv : SLICE_X83Y216.
 
 
 The following Components are new/changed.
 -----------------------------------------
+ envolve/evo_ctrl/evo_s_ctrl/current_state_FSM_FFd2 : SLICE_X44Y199.
+ N117 : SLICE_X44Y201.
+ envolve/evo_ctrl/random_generator/LFSR<11> : SLICE_X46Y206.
+ envolve/evo_ctrl/random_generator/LFSR<3> : SLICE_X46Y207.
+ envolve/evo_ctrl/random_generator/LFSR<7> : SLICE_X47Y206.
+ envolve/evo_ctrl/random_generator/LFSR<15> : SLICE_X47Y207.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd2544_lut<1> : SLICE_X58Y216.
+ envolve/evo_logic/map_b<15>_15 : SLICE_X60Y215.
+ ps2/ps2_byte<0> : SLICE_X63Y187.
+ ps2/ps2_byte<7> : SLICE_X63Y188.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd2540_lut<1> : SLICE_X63Y220.
+ envolve/evo_logic/_n37292_inv : SLICE_X62Y191.
+ envolve/evo_logic/map_b<0>_15 : SLICE_X62Y220.
 
 
 The following Nets were re-routed.
 ----------------------------------
+ envo_ctrl_cmd<5>.
+ envolve/evo_ctrl/evo_s_ctrl/current_state_FSM_FFd3.
+ envolve/evo_ctrl/evo_s_ctrl/current_state_FSM_FFd2.
+ leddirver/shift<14>.
+ envolve/evo_logic/pre_evo_clk[0][0]_change_state_AND_2_o.
+ N197.
+ N351.
+ N281.
+ N383.
+ envolve/evo_logic/map_a<3>_2.
+ envolve/cur_ctrl/rst_inv.
+ envolve/evo_logic/Mmux_map_a[15][3]_GND_3_o_MUX_1953_o11.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd1309_lut<0>.
+ N187.
+ N389.
+ N325.
+ N287.
+ N243.
+ N277.
+ N317.
+ N347.
+ envolve/evo_logic/map_a<11>_14.
+ N183.
+ N353.
+ envolve/evo_logic/map_b<15>_15.
+ N321.
+ N385.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd315_cy<0>.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd318.
+ N283.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd_02541.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd831.
+ envolve/evo_logic/map_b<0>_0.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd2541_cy<0>.
+ envolve/evo_logic/write_en_GND_3_o_AND_1347_o.
+ N103.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd2540_lut<1>.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd2547_lut<0>21.
+ N343.
+ N273.
+ N179.
+ N211.
+ N279.
+ N245.
+ envolve/evo_logic/write_en_GND_3_o_AND_195_o.
+ N311.
+ ps2/ps2_byte<3>.
+ N127.
+ envolve/evo_logic/Mmux_map_b[14][2]_map_b[14][2]_MUX_1816_o1.
+ N185.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd_02529.
+ envolve/evo_logic/map_b<0>_15.
+ N301.
+ N241.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd2531_lut<0>21.
+ N233.
+ N207.
+ N175.
+ envolve/evo_ctrl/trav_core/_n0051_inv.
+ envolve/evo_ctrl/clear_en_pattern_en_OR_545_o.
+ envolve/evo_ctrl/evo_s_ctrl/current_state_FSM_FFd1.
+ envolve/evo_ctrl/trav_core/_n0059_inv.
+ N345.
+ envolve/evo_logic/map_a<2>_2.
+ N213.
+ N181.
+ N263.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd238.
+ N101.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd_02545.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd2545_cy<0>.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd2544_lut<1>.
+ N203.
+ N171.
+ N271.
+ N303.
+ N341.
+ N415.
+ ps2/ps2_byte<2>.
+ ps2/ps2_byte<4>.
+ ps2/ps2_byte<5>.
+ ps2/ps2_byte<6>.
+ ps2/ps2_byte<7>.
+ N315.
+ ps2/ps2_byte<0>.
+ ps2/ps2_byte<1>.
+ ps2/ps2_state.
+ N209.
+ N227.
+ N259.
+ N231.
+ N167.
+ N265.
+ N411.
+ N379.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd1000_cy<0>.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd1003.
+ N419.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd2520_cy<0>.
+ N309.
+ N205.
+ N173.
+ N159.
+ N255.
+ N305.
+ N253.
+ N235.
+ N407.
+ N193.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd80_cy<0>.
+ N169.
+ N201.
+ N413.
+ N229.
+ N293.
+ N403.
+ N371.
+ N297.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd239_lut<0>.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd235_cy<0>.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd985_cy<0>.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd988.
+ N165.
+ ps2/_n0115_inv.
+ N409.
+ N377.
+ leddirver/shift<16>.
+ N291.
+ N25.
+ envo_ctrl_cmd<0>.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd2527_lut<0>21.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd2535_lut<0>2.
+ N399.
+ N367.
+ N123.
+ N335.
+ envolve/evo_logic/_n38102_inv.
+ N223.
+ N161.
+ N373.
+ N247.
+ envolve/evo_logic/Mmux_map_b[15][15]_map_b[15][15]_MUX_2048_o12.
+ N363.
+ N331.
+ N395.
+ N219.
+ N199.
+ N337.
+ N369.
+ N401.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd1574_lut<0>.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd1574_lut<0>11.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd2525_cy<0>.
+ N225.
+ N327.
+ N391.
+ N359.
+ N289.
+ N215.
+ N195.
+ envolve/evo_logic/_n37886_inv.
+ envolve/evo_logic/_n35612_inv.
+ N397.
+ N365.
+ envolve/evo_logic/_n35672_inv.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd2543_lut<0>21.
+ envolve/evo_logic/_n35438_inv.
+ N221.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd1004.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd2524_lut<1>.
+ N387.
+ N323.
+ ps2/counter[3]_neg_ps2_clk_AND_1615_o.
+ envolve/evo_logic/_n35648_inv.
+ N251.
+ N191.
+ N329.
+ N361.
+ N393.
+ N217.
+ N130.
+ envolve/evo_logic/rAddrC[3]_map_b[15][11]_Mux_6679_o.
+ N421.
+ envolve/evo_logic/_n37328_inv.
+ envolve/evo_ctrl/pattern_generator/Mmux_read_data_3.
+ N148.
+ N133.
+ envolve/evo_logic/_n35042_inv.
+ N146.
+ envolve/evo_logic/_n35222_inv.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd319.
+ envolve/evo_logic/_n35456_inv.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd989.
+ ps2/key_f0.
+ ps2/_n0109_inv.
+ envolve/evo_logic/_n35462_inv.
+ envolve/evo_logic/_n37292_inv.
+ mainCtrl/pre_space.
+ envolve/evo_logic/_n38042_inv.
+ N117.
+ N121.
+ N189.
+ leddirver/shift<1>.
+ N239.
+ N237.
+ N267.
+ N405.
+ N261.
+ N257.
+ N275.
+ N125.
+ N177.
+ N295.
+ envolve/evo_ctrl/evo_s_ctrl/current_state_FSM_FFd3-In1.
+ N381.
+ N299.
+ N307.
+ N249.
+ N135.
+ N140.
+ N137.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd319_lut<0>2.
+ N119.
+ envolve/evo_logic/Mmux_map_a[3][2]_GND_3_o_MUX_409_o12.
+ N375.
+ N349.
+ N285.
+ N431.
+ N425.
+ N429.
+ N423.
+ N107.
+ N437.
+ N163.
+ N45.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd239.
+ N433.
+ ps2/_n0105_inv.
+ N417.
+ N427.
+ N435.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd989_lut<0>2.
+ N357.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd70_lut<0>.
+ N319.
+ N339.
+ N313.
+ envolve/evo_logic/Mmux_map_a[11][14]_GND_3_o_MUX_1529_o12.
+ N269.
+ N355.
+ N333.
 
 
 The following Nets are new/changed.
 -----------------------------------
+ envolve/evo_logic/Mmux_map_a[0][10]_GND_3_o_MUX_89_o12.
+ testbits<0>.
+ N150.
+ ps2/GND_36_o_PWR_33_o_MUX_2477_o.
+ N155.
+ N129.
+ N142.
+ N139.
+ envolve/evo_ctrl/random_generator/LFSR<10>.
+ envolve/evo_ctrl/random_generator/LFSR<12>.
+ envolve/evo_ctrl/random_generator/LFSR<13>.
+ envolve/evo_ctrl/random_generator/LFSR<15>.
+ envolve/evo_ctrl/random_generator/LFSR<0>.
+ envolve/evo_ctrl/random_generator/LFSR<11>.
+ envolve/evo_ctrl/random_generator/LFSR<3>.
+ envolve/evo_ctrl/random_generator/LFSR<7>.
+ envolve/evo_ctrl/random_generator/LFSR<8>.
+ envolve/evo_ctrl/random_generator/LFSR<9>.
+ envolve/evo_ctrl/random_generator/LFSR<1>.
+ envolve/evo_ctrl/random_generator/LFSR<2>.
+ envolve/evo_ctrl/random_generator/LFSR<4>.
+ envolve/evo_ctrl/random_generator/LFSR<5>.
+ envolve/evo_ctrl/random_generator/LFSR<6>.
+ envolve/evo_ctrl/random_generator/LFSR<14>.
+ N132.
+ N439.
 
 
 The following Nets were partially guided.
 -----------------------------------------
+ mainCtrl/mode.
+ envolve/evo_ctrl/evo_ctrl/Mcompar_envolve_v_cy<4>.
+ envolve/evo_logic/pre_evo_clk<0>_0.
+ envolve/evo_logic/map_b<5>_11.
+ envolve/evo_logic/map_b<4>_11.
+ clk_BUFGP.
+ envo_ctrl_cmd<6>.
+ leddirver/shift<13>.
+ leddirver/shift<15>.
+ envolve/evo_logic/map_a<15>_14.
+ envolve/evo_logic/map_a<15>_15.
+ envolve/evo_logic/GND_3_o_GND_3_o_equal_155_o<7>1.
+ envolve/evo_logic/write_en_GND_3_o_AND_1443_o.
+ envolve/wAddrR<2>.
+ envolve/wAddrR<3>.
+ envolve/evo_logic/map_index.
+ envolve/evo_logic/GND_3_o_GND_3_o_equal_129_o<7>1.
+ envolve/evo_logic/map_a<2>_4.
+ envolve/evo_logic/map_b<15>_14.
+ envolve/evo_logic/map_b<11>_14.
+ envolve/evo_logic/map_b<12>_13.
+ envolve/evo_logic/map_b<6>_11.
+ envolve/evo_logic/map_b<7>_11.
+ envolve/evo_logic/map_a<1>_2.
+ envolve/evo_logic/map_a<1>_1.
+ envolve/evo_logic/map_b<4>_3.
+ envolve/evo_logic/map_a<11>_0.
+ envolve/evo_logic/map_b<8>_11.
+ envolve/evo_logic/map_b<9>_11.
+ envolve/evo_logic/map_a<10>_14.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd3_lut<0>.
+ envolve/evo_logic/map_a<14>_10.
+ envolve/evo_logic/map_a<0>_0.
+ envolve/evo_logic/map_a<15>_0.
+ envolve/evo_logic/map_a<15>_1.
+ envolve/evo_logic/map_a<1>_0.
+ envolve/evo_logic/map_a<0>_1.
+ envolve/evo_logic/map_a<0>_9.
+ envolve/evo_logic/map_a<14>_9.
+ envolve/evo_logic/map_a<15>_8.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd1308_lut<0>1.
+ envolve/evo_logic/map_b<4>_1.
+ envolve/evo_logic/map_b<10>_12.
+ envolve/evo_logic/map_b<13>_11.
+ envolve/evo_logic/map_b<11>_11.
+ envolve/evo_logic/map_b<11>_12.
+ envolve/evo_logic/map_b<12>_12.
+ envolve/evo_logic/map_b<11>_10.
+ envolve/evo_logic/map_b<14>_11.
+ envolve/evo_logic/map_b<15>_11.
+ envolve/evo_logic/GND_3_o_GND_3_o_equal_103_o<7>2.
+ envolve/evo_logic/write_en_GND_3_o_AND_291_o.
+ envolve/evo_logic/map_b<2>_3.
+ envolve/evo_logic/map_b<3>_2.
+ envolve/evo_logic/map_b<2>_2.
+ envolve/evo_logic/map_b<10>_10.
+ envolve/evo_logic/map_b<10>_11.
+ envolve/evo_logic/GND_3_o_GND_3_o_equal_181_o<7>1.
+ ps2/counter<1>.
+ ps2/counter<0>.
+ ps2/counter<3>.
+ ps2/counter<2>.
+ envolve/evo_logic/write_en_GND_3_o_AND_675_o.
+ envolve/evo_logic/write_en_GND_3_o_AND_387_o.
+ envolve/evo_logic/map_b<15>_1.
+ envolve/evo_logic/map_b<14>_15.
+ envolve/evo_logic/map_b<15>_0.
+ envolve/dp_ctrl/cell_rem_y_px[7]_GND_16_o_equal_11_o.
+ envolve/dp_ctrl/cell_rem_x_px[7]_GND_16_o_equal_10_o.
+ envolve/evo_logic/map_a<0>_14.
+ envolve/evo_logic/map_b<1>_11.
+ envolve/evo_logic/map_b<0>_11.
+ envolve/evo_logic/map_a<0>_10.
+ envolve/evo_logic/map_b<12>_11.
+ envolve/evo_logic/map_b<4>_2.
+ envolve/evo_logic/map_b<3>_1.
+ envolve/evo_logic/map_b<3>_3.
+ envolve/evo_logic/map_b<2>_1.
+ envolve/evo_logic/map_a<0>_15.
+ envolve/evo_logic/map_a<15>_3.
+ envolve/evo_logic/map_b<1>_1.
+ envolve/evo_logic/map_b<3>_11.
+ envolve/evo_logic/map_b<2>_11.
+ envolve/evo_logic/write_en_GND_3_o_AND_579_o.
+ envolve/evo_logic/map_b<1>_15.
+ envolve/evo_logic/map_a<1>_4.
+ envolve/evo_logic/map_b<1>_14.
+ envolve/wAddrC<3>.
+ envolve/wAddrC<0>.
+ envolve/wAddrC<1>.
+ envolve/wAddrC<2>.
+ envolve/evo_logic/write_en_GND_3_o_AND_1059_o1.
+ envolve/evo_logic/map_b<0>_14.
+ envolve/evo_ctrl/traverse_end.
+ envolve/evo_ctrl/trav_core/addrC<3>.
+ envolve/evo_ctrl/trav_core/addrC<2>.
+ envolve/evo_ctrl/trav_core/addrC<0>.
+ envolve/evo_ctrl/trav_core/addrC<1>.
+ envolve/evo_logic/map_b<1>_0.
+ envolve/evo_logic/map_b<1>_2.
+ envolve/evo_logic/map_b<1>_4.
+ envolve/evo_logic/map_b<1>_3.
+ envolve/evo_ctrl/evo_ctrl/count<14>.
+ envolve/evo_ctrl/evo_ctrl/count<19>.
+ envolve/evo_logic/write_en_GND_3_o_AND_1059_o.
+ envolve/evo_ctrl/evo_ctrl/count<1>.
+ mainCtrl/ps2_p/count<22>.
+ SW_15_IBUF.
+ envolve/cur_ctrl/pre_m_u.
+ envolve/evo_logic/map_a<12>_15.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd235_lut<0>.
+ envolve/evo_logic/write_en_GND_3_o_AND_1155_o.
+ ps2/ps2_temp<1>.
+ ps2/ps2_temp<2>.
+ envolve/wAddrR<7>.
+ envolve/cur_x<7>.
+ envolve/cur_x<6>.
+ envolve/cell_x<7>.
+ envolve/cell_x<6>.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd_01570.
+ envolve/cur_ctrl/pre_m_r.
+ envolve/cell_x<0>.
+ envolve/cell_x<1>.
+ envolve/cell_x<2>.
+ envolve/cell_x<3>.
+ segDevice/U2/shift<13>.
+ segDevice/U2/shift<2>.
+ ps2/ps2_clk_r<1>.
+ ps2/ps2_clk_r<2>.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd_02533.
+ ps2/ps2_temp<0>.
+ ps2/ps2_temp<3>.
+ ps2/ps2_temp<4>.
+ ps2/ps2_temp<5>.
+ ps2/ps2_temp<6>.
+ ps2/ps2_temp<7>.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd_02521.
+ mainCtrl/ps2_p/ps2_state_sampling<1>.
+ leddirver/shift<0>.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd_02525.
+ envolve/evo_logic/ADDERTREE_INTERNAL_Madd_01485.

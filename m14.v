@@ -65,8 +65,26 @@ module main_ctrl(
         end
     end
 
-	 
+    reg [7: 0] visi_cell_num = 8;
+    reg pre_z_i = 0;
+    reg pre_z_o = 0;
+	reg has_prsd_z = 0;
+ 	always @ (posedge clk or negedge rst) begin
+	    if (~rst) begin
+	        visi_cell_num <= 8'b0000_1000;
+	    end else begin
+            if (win_ctrl_cmd[`Z_IN] & ~ pre_z_i) begin
+                visi_cell_num <= (visi_cell_num > 2) ? visi_cell_num >> 1 : 1;
+            end else if (win_ctrl_cmd[`Z_OUT] & ~ pre_z_o) begin
+                visi_cell_num <= (visi_cell_num < 64) ? visi_cell_num << 1 : 128;
+            end
+	        pre_z_i = win_ctrl_cmd[`Z_IN];
+            pre_z_o = win_ctrl_cmd[`Z_OUT];
+	    end
+	end
 
+    assign view_width = visi_cell_num;
+ 
     assign envo_ctrl_cmd[`CLR]           =  keys[`KEY_C];
     assign envo_ctrl_cmd[`INC_V]         =  keys[`KEY_S_UP];
     assign envo_ctrl_cmd[`DEC_V]         =  keys[`KEY_S_DOWN];

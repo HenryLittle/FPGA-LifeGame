@@ -1,23 +1,13 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date:    07:40:24 01/06/2019 
-// Design Name: 
-// Module Name:    m12 
-// Project Name: 
-// Target Devices: 
-// Tool versions: 
-// Description: 
-//
-// Dependencies: 
-//
-// Revision: 
-// Revision 0.01 - File Created
-// Additional Comments: 
-//
-//////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+//      _____       ___       ___  ___   _____        _____   _____        _       _   _____   _____  //
+//     /  ___|     /   |     /   |/   | | ____|      /  _  \ |  ___|      | |     | | |  ___| | ____| //
+//    | |        / /| |    / /|   /| | | |__        | | | | | |__        | |     | | | |__   | |__    //
+//   | |  _    / / | |   / / |__/ | | |  __|       | | | | |  __|       | |     | | |  __|  |  __|    //
+//  | |_| |  / /  | |  / /       | | | |___       | |_| | | |          | |___  | | | |     | |___     //
+// \_____/ /_/   |_| /_/        |_| |_____|      \_____/ |_|          |_____| |_| |_|     |_____|     //
+//                                             Henry Little                                           //
+////////////////////////////////////////////////////////////////////////////////////////////////////////
 `include "defines.v"
 module LifeGame(
    input clk,
@@ -36,7 +26,7 @@ module LifeGame(
 	output SEGLED_CLR,
 	output SEGLED_DO,
 	output SEGLED_PEN,
-   output LED_CLK,
+    output LED_CLK,
 	output LED_CLR,
 	output LED_DO,
 	output LED_PEN
@@ -75,41 +65,22 @@ module LifeGame(
 
     wire [11: 0] disp_value_RGB;
 	 
-	 //assign r = disp_value_RGB[11: 8];
-	 //assign g = disp_value_RGB[ 7: 4];
-	 //assign b = disp_value_RGB[ 3: 0];
-	 
-	 reg [7: 0] visi_cell_num = 8;
-	 reg has_prsd_z = 0;
- 	 always @ (posedge clk or negedge rst) begin
-	     if (~rst) begin
-		      visi_cell_num <= 8;
-		  end else begin
-		      if (SW[13] & ~ has_prsd_z) begin
-				    visi_cell_num <= visi_cell_num + 8;
-					 has_prsd_z = 1;
-				end else if (~SW[13]) begin
-				    has_prsd_z = 0;
-				end
-		  end
-	 end
-	 
-	 wire mode;
+	wire mode;
     wire [6: 0] wAddrC, wAddrR;
     wire [2: 0] testbits;
+	wire [7: 0] view_width;
     envolve_sub_top #( .MAP_WIDTH(16), .MAP_HEIGHT(16)) envolve(
        .clk(clk), .rst(rst),
        .scan_x(pAddrC_X),
        .scan_y({1'b0, pAddrR_Y}),
        .mode(mode),
-       .visi_cell_num(visi_cell_num),
+       .visi_cell_num(view_width),
        .win_ctrl_cmd(win_ctrl_cmd), // SW[6: 0]
        .envo_ctrl_cmd(envo_ctrl_cmd), // SW[14: 7]
        .disp_value_RGB(disp_value_RGB),
        .testbits(testbits)
     );
 	 
-	wire [7: 0] view_width;
 	wire [7: 0] ps2_byte; // output from ps2 driver
 	wire ps2_state;       // output form ps2 driver
 	main_ctrl mainCtrl (
@@ -140,12 +111,12 @@ module LifeGame(
     );
 	 
 	
-	 wire [3: 0] sout;    // connection bus to the board
-	 Seg7Device segDevice(
+	wire [3: 0] sout;    // connection bus to the board
+	Seg7Device segDevice(
         .clkIO(count[3]), 
         .clkScan(count[15:14]),
         .clkBlink(count[25]),
-		  .data({{1'b0}, wAddrC, {1'b0}, wAddrR, {7{1'b0}}, mode, ps2_byte}),
+		.data({{1'b0}, wAddrC, {1'b0}, wAddrR, {7{1'b0}}, mode, ps2_byte}),
         .point(8'h0), .LES(8'h0),
 		.sout(sout)
     );
@@ -154,7 +125,7 @@ module LifeGame(
 	 assign SEGLED_PEN = sout[1];
 	 assign SEGLED_CLR = sout[0];
 	
-	 PS2_driver ps2 (
+	PS2_driver ps2 (
         .clk(clk), 
         .rst(rst), 
         .ps2_clk(ps2_clk), 
@@ -164,7 +135,7 @@ module LifeGame(
     );
 	 
     ShiftReg 
-	 #(.WIDTH(16)) leddirver (
+	#(.WIDTH(16)) leddirver (
         .clk(count[3]), 
         .pdata({~mode, ~testbits, ~envo_ctrl_cmd[6: 3], ~ps2_byte}), 
         .sout({LED_CLK,LED_DO,LED_PEN,LED_CLR})

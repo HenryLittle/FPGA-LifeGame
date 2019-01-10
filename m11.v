@@ -107,7 +107,7 @@ module envolve_sub_top (
     );
 
     envolve_display_ctrl  dp_ctrl (
-	     .clk(clk), .rst(rst), 
+	    .clk(clk), .rst(rst), 
         .mode(mode),
         .scan_x(scan_x),
         .scan_y(scan_y),

@@ -108,7 +108,6 @@ module envolve_display_ctrl (
         end else if (cursor_en & (cell_rem_x_px == 7'b0 | cell_rem_y_px == 7'b0)) begin
             disp_value_RGB = 12'b0111_0000_0000;
         end else begin
-           
             if ((cell_x == cur_x) & (cell_y == cur_y)) begin
                 disp_value_RGB = 12'b0000_1111_0000;
             end else begin
@@ -145,12 +144,16 @@ module calculate_cell (
     reg [7: 0] cell_width_px;
     // assign the temporary cell width, needs testing on a real board
     always @ (*) begin
-        casex (visi_cell_num[5: 3]) // divide by 4
+        casex (visi_cell_num[7: 0]) // divide by 4
 		  //casex treats all the x and z values in the case expression as don't cares.
-          3'b1xx : cell_width_px = 7'b000_1000;
-          3'b01x : cell_width_px = 7'b001_0000;
-          3'b001 : cell_width_px = 7'b010_0000;
-          default: cell_width_px = 7'b100_0000;
+          8'b1xxxxxxx : cell_width_px = 8'b0000_0100;
+          8'b01xxxxxx : cell_width_px = 8'b0000_0100;
+          8'b001xxxxx : cell_width_px = 8'b0000_0100;
+          8'b0001xxxx : cell_width_px = 8'b0000_1000;
+          8'b00001xxx : cell_width_px = 8'b0001_0000;
+          8'b000001xx : cell_width_px = 8'b0010_0000;
+          8'b0000001x : cell_width_px = 8'b0100_0000;
+          8'b00000001 : cell_width_px = 8'b1000_0000;
         endcase
     end
 

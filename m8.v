@@ -32,15 +32,15 @@ module envolve_ctrl (
     cur_y,
     random_en, clear_en, pattern_en
 );
-    parameter K = 6;
     parameter MAP_HEIGHT = 8;
     parameter MAP_WIDTH = 8;
+
     input wire clk, rst;
-    input wire `ADDR_WIDTH cur_x, cur_y;
     input wire mode;
+    input wire `ADDR_WIDTH cur_x, cur_y;
     input wire `ENVO_CTRL_CMD envo_ctrl_cmd;
-    output wire change_state;
     output wire `ADDR_WIDTH wAddrC, wAddrR;
+    output wire change_state;  // the controlled clock for life game iteration
     output wire write_en;
     output wire write_data;
 
@@ -72,6 +72,7 @@ module envolve_ctrl (
     assign cur_user_data = envo_ctrl_cmd[`CUR_USER_DATA];
     ///////////////////////////////////////////////////////
     wire random_out;
+    wire pattern_out;
     wire `ADDR_WIDTH traversal_x;
     wire `ADDR_WIDTH traversal_y;
     
@@ -80,7 +81,8 @@ module envolve_ctrl (
     ////////////
     assign write_en = clear_en | random_en | pattern_en | cur_user_set;
     assign write_data = cur_user_set ? cur_user_data : 
-         (clear_en ? 1'b0 : (random_en ? random_out : (pattern_en ? 1'b1 : 1'b0)));
+         (clear_en ? 1'b0 : (random_en ? random_out : (pattern_en ? pattern_out : 1'b0)));
+    //assign write_data = pattern_out;
     assign wAddrC = cur_user_set ? cur_x : traversal_x;
     assign wAddrR = cur_user_set ? cur_y : traversal_y;
 
@@ -97,6 +99,13 @@ module envolve_ctrl (
         .addrC(traversal_x),
         .addrR(traversal_y),
         .finish(traverse_end)
+    );
+
+    pattern_core pattern_generator (
+        .clk(clk), .rst(rst),
+	    .addrC(traversal_x),
+        .addrR(traversal_y),
+        .read_data(pattern_out)
     );
 
     wire random_end;
@@ -219,6 +228,38 @@ module travers_board (
             end
         end
     end
+
+endmodule
+
+module pattern_core (
+	clk, rst,
+	addrC,
+    addrR,
+    read_data
+); 
+
+    input clk, rst;
+    input [7: 0] addrC, addrR;
+    output read_data;
+    localparam step = 128;
+	reg [15: 0] offset = 0;
+    wire [9: 0] rAddrR = {{3'b000}, addrR};
+    wire [127: 0] data_out;
+
+    always @ (posedge clk or negedge rst) begin
+        if (~rst) begin
+            offset <= 0;
+        end
+    end
+
+	patterns P_CORE (
+        .clka(clk), // input clka
+        .wea(1'b0),
+        .addra(rAddrR), // input [9 : 0] addra
+        .douta(data_out) // output [127 : 0] douta
+    );
+
+    assign read_data = data_out[127 - addrC];
 
 endmodule
 

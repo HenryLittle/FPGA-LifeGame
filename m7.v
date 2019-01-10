@@ -121,13 +121,12 @@ module cursor_ctrl (
     reg pre_m_l = 0;
     reg pre_m_r = 0;
 
-
     // handle window and cursor seperately
     always @ (posedge clk, negedge rst) begin
         if (~rst) begin
             win_x <= INITIAL_WIN_X;
             win_y <= INITIAL_WIN_Y;
-				cur_r_x = INITIAL_R_CUR_X;
+			cur_r_x = INITIAL_R_CUR_X;
             cur_r_y = INITIAL_R_CUR_Y;
         end else begin
             if (win_mode) begin
