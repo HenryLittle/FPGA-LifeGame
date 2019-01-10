@@ -397,6 +397,11 @@ module envolve_logic (
 		map_a[0][2] = 1;
 		map_a[1][2] = 1;
 		map_a[2][2] = 1;
+		map_b[1][0] = 1;
+		map_b[2][1] = 1;
+		map_b[0][2] = 1;
+		map_b[1][2] = 1;
+		map_b[2][2] = 1;
 	end
 
     always @ (posedge clk_envo) begin

@@ -106,7 +106,8 @@ module envolve_sub_top (
         .view_width(visi_cell_num)
     );
 
-    envolve_display_ctrl  dp_ctrl (
+    envolve_display_ctrl 
+    #(.MAP_WIDTH(MAP_WIDTH),.MAP_HEIGHT(MAP_HEIGHT)) dp_ctrl (
 	    .clk(clk), .rst(rst), 
         .mode(mode),
         .scan_x(scan_x),
