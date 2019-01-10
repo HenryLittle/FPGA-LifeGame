@@ -22,7 +22,7 @@
 // read cell data and drive the cells
 `include "defines.v"
 module envolve_display_ctrl (
-	 clk, rst,
+	clk, rst,
     mode,
     scan_x,
     scan_y,
@@ -37,24 +37,23 @@ module envolve_display_ctrl (
     in_disp_area,
     disp_value_RGB
 );
-    parameter K = 6;
     parameter PX_BOUND_LM = 50; 
     parameter PX_BOUND_RM = 400; 
     parameter PX_BOUND_UM = 50;
     parameter PX_BOUND_DM = 400; 
 	 
-	 input clk, rst;
+	input clk, rst;
     input mode;
+    input cell_state;
     input [9: 0] scan_x;
     input [9: 0] scan_y;
-    input [K - 1: 0] win_x;
-    input [K - 1: 0] win_y;
     input [7: 0] visi_cell_num;
-    input [K - 1: 0] cur_x;
-    input [K - 1: 0] cur_y;
-    input cell_state;
-    output [K - 1: 0] cell_x;
-    output [K - 1: 0] cell_y;
+    input `ADDR_WIDTH win_x;
+    input `ADDR_WIDTH win_y;
+    input `ADDR_WIDTH cur_x;
+    input `ADDR_WIDTH cur_y;
+    output `ADDR_WIDTH cell_x;
+    output `ADDR_WIDTH cell_y;
     output in_disp_area;
     output reg [11: 0] disp_value_RGB; // this output goes into the vga core
 
@@ -87,7 +86,7 @@ module envolve_display_ctrl (
     // draw the cells and cursor
 
     wire [7: 0] cell_rem_x_px, cell_rem_y_px;
-    calculate_cell #(K) cal_cell (
+    calculate_cell cal_cell (
         .clk(clk), .rst(rst),
         .win_x(win_x),
         .win_y(win_y),
@@ -132,16 +131,14 @@ module calculate_cell (
     cell_rem_x_px,
     cell_rem_y_px
 );
-    parameter K = 6;
-
     input      clk, rst;
-    input      [K - 1: 0]   win_x;
-    input      [K - 1: 0]   win_y;
+    input      `ADDR_WIDTH   win_x;
+    input      `ADDR_WIDTH   win_y;
     input      [9: 0]       scan_r_x;
     input      [9: 0]       scan_r_y;
     input      [7: 0]       visi_cell_num;
-    output wire [K - 1: 0]   cell_x;
-    output wire [K - 1: 0]   cell_y;
+    output wire `ADDR_WIDTH   cell_x;
+    output wire `ADDR_WIDTH   cell_y;
     output     [7: 0]       cell_rem_x_px;
     output     [7: 0]       cell_rem_y_px;
 
@@ -158,8 +155,8 @@ module calculate_cell (
     end
 
     wire [9: 0] cell_x_quo, cell_y_quo;
-    assign cell_x = win_x + cell_x_quo[K - 1: 0];
-    assign cell_y = win_y + cell_y_quo[K - 1: 0];
+    assign cell_x = win_x + cell_x_quo[7: 0];
+    assign cell_y = win_y + cell_y_quo[7: 0];
 
     divide #(10, 8) div_x (
         .numerator(scan_r_x),

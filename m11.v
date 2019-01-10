@@ -29,9 +29,11 @@ module envolve_sub_top (
     win_ctrl_cmd,
     envo_ctrl_cmd,
     disp_value_RGB,
-    in_disp_area
+    in_disp_area,
+    testbits
 );
-    parameter K = 6;
+    parameter MAP_HEIGHT = 8;
+    parameter MAP_WIDTH = 8;
     parameter INITIAL_WIN_X = 1'b0;
     parameter INITIAL_WIN_Y = 1'b0;
     parameter INITIAL_R_CUR_X = 1'b1;
@@ -47,47 +49,53 @@ module envolve_sub_top (
     output [11: 0] disp_value_RGB;
     output in_disp_area; // from dpc
 
+    output [2: 0] testbits;
 
     // ctrl and logic
     wire write_en, change_state;
-    wire [K - 1: 0] wAddrR, wAddrC;
+    wire `ADDR_WIDTH wAddrR, wAddrC;
     wire write_data;
 
     // logic and display
-    wire [K - 1: 0] rAddrC, rAddrR; // from display to logic
+    wire `ADDR_WIDTH rAddrC, rAddrR; // from display to logic
     wire read_data;// f l t d
     
     // cur ctrl 
-    wire [K - 1: 0] cur_x, cur_y;
-    wire [K - 1: 0] win_x, win_y; // from cur_ctrl to display
+    wire `ADDR_WIDTH cur_x, cur_y;
+    wire `ADDR_WIDTH win_x, win_y; // from cur_ctrl to display
 
     // dp
-    wire [K - 1: 0] cell_x; // from disp
-    wire [K - 1: 0] cell_y;
+    wire `ADDR_WIDTH cell_x; // from disp
+    wire `ADDR_WIDTH cell_y;
 
-    envolve_logic #(K) evo_logic (
-        .clk_envo(change_state), .rst(rst),
+    envolve_logic 
+    #(.MAP_WIDTH(MAP_WIDTH),.MAP_HEIGHT(MAP_HEIGHT)) evo_logic (
+        .clk(clk), .clk_envo(change_state), .rst(rst),
         .write_en(write_en),
-        .change_state(change_state),
+        .change_state(mode),
         .rAddrR(cell_y), .rAddrC(cell_x),
         .wAddrR(wAddrR), .wAddrC(wAddrC),
         .write_data(write_data),
         .read_data(read_data)
     );
 
-    envolve_ctrl #(K) evo_ctrl (
+    envolve_ctrl 
+    #(.MAP_WIDTH(MAP_WIDTH),.MAP_HEIGHT(MAP_HEIGHT)) evo_ctrl (
         .clk(clk), .rst(rst),
         .envo_ctrl_cmd(envo_ctrl_cmd),
         .change_state(change_state),
         .mode(mode),
-        //.wAddrR(wAddrR), .wAddrC(wAddrC),
+        .wAddrR(wAddrR), .wAddrC(wAddrC),
         .write_en(write_en),
         .write_data(write_data),
         .cur_x(cur_x),
-        .cur_y(cur_y)
+        .cur_y(cur_y),
+        .random_en(testbits[0]), 
+        .clear_en(testbits[1]), 
+        .pattern_en(testbits[2])
     );
     // cur_x & y are the positions on the map (not relative to win_x & y)
-    cursor_ctrl #(K) cur_ctrl (
+    cursor_ctrl cur_ctrl (
         .clk(clk), .rst(rst),
         .mode(mode),
         .win_ctrl_cmd(win_ctrl_cmd),
@@ -98,7 +106,7 @@ module envolve_sub_top (
         .view_width(visi_cell_num)
     );
 
-    envolve_display_ctrl #(.K(K)) dp_ctrl (
+    envolve_display_ctrl  dp_ctrl (
 	     .clk(clk), .rst(rst), 
         .mode(mode),
         .scan_x(scan_x),

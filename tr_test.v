@@ -4,15 +4,15 @@
 // Company: 
 // Engineer:
 //
-// Create Date:   15:40:24 01/07/2019
-// Design Name:   main_ctrl
-// Module Name:   C:/Users/32882/Documents/ISE/GameOfLife/main_ctrl_sim.v
+// Create Date:   21:21:24 01/09/2019
+// Design Name:   travers_boardm
+// Module Name:   C:/Users/32882/Documents/ISE/GameOfLife/tr_test.v
 // Project Name:  GameOfLife
 // Target Device:  
 // Tool versions:  
 // Description: 
 //
-// Verilog Test Fixture created by ISE for module: main_ctrl
+// Verilog Test Fixture created by ISE for module: travers_boardm
 //
 // Dependencies:
 // 
@@ -22,50 +22,47 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-module main_ctrl_sim;
+module tr_test;
 
 	// Inputs
 	reg clk;
 	reg rst;
-	reg [15:0] keys;
+	reg en;
 
 	// Outputs
-	wire [6:0] win_ctrl_cmd;
-	wire [7:0] envo_ctrl_cmd;
-	wire [7:0] view_width;
-	wire mode;
-	reg [7: 0] pby;
-	reg psta;
+	wire [7:0] addrC;
+	wire [7:0] addrR;
+	wire finish;
 
 	// Instantiate the Unit Under Test (UUT)
-	main_ctrl uut (
+	travers_boardm uut (
 		.clk(clk), 
 		.rst(rst), 
-		.ps2_byte(pby),
-	   .ps2_state(psta),
-		.win_ctrl_cmd(win_ctrl_cmd), 
-		.envo_ctrl_cmd(envo_ctrl_cmd), 
-		.view_width(view_width), 
-		.mode(mode)
+		.enable(en), 
+		.addrC(addrC), 
+		.addrR(addrR), 
+		.finish(finish)
 	);
 
 	initial begin
 		// Initialize Inputs
 		clk = 0;
 		rst = 0;
-		keys = 0;
+		en = 0;
 
 		// Wait 100 ns for global reset to finish
 		#100;
 		rst = 1;
-		pby = 8'h29;
+		#100;
+		en = 1;
+		
         
 		// Add stimulus here
 
 	end
 	always begin
-	clk = 1;#20;
-	clk = 0;#20;
+		clk = 1; #20;
+		clk = 0; # 20;
 	end
       
 endmodule

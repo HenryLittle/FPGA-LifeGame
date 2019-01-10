@@ -22,7 +22,7 @@
 module main_ctrl(
     clk, rst,
     ps2_byte,
-	 ps2_state,
+	ps2_state,
     win_ctrl_cmd,
     envo_ctrl_cmd,
     view_width,
@@ -34,36 +34,46 @@ module main_ctrl(
     output `WIN_CTRL_CMD win_ctrl_cmd;
     output `ENVO_CTRL_CMD envo_ctrl_cmd;
     output [7: 0] view_width;
-    output reg mode;
-
-    parameter ZOOM_MIN = 8'b0000_1000; //  8
-    parameter ZOOM_MAX = 8'b1000_0000; //128
+    output reg mode = 1'b0; // envolve or edit mode
 	 
-	 wire `KEYS keys;
-	 ps2_parser ps2_p (
+	wire `KEYS keys;
+	ps2_parser ps2_p (
         .clk(clk), 
         .ps2_byte(ps2_byte), 
-		  .ps2_state(ps2_state)
+		.ps2_state(ps2_state),
         .keys(keys)
     );
 
-
-    // change mode @ tested
-    always @ (posedge keys[`KEY_SPACE] or negedge rst) begin
+    reg pre_space = 0;
+    reg pre_w_mode = 0;
+    // window mode 1 or cursor mode 0
+    reg w_mode = 0;
+    
+    always @ (posedge clk or negedge rst) begin
         if (~rst) begin
             mode <= 1'b0;
+            w_mode <= 1'b0;
         end else begin
-            mode <= ~mode;
+            if (keys[`KEY_SPACE] & ~ pre_space) begin
+                mode <= ~mode;
+            end
+            if (keys[`KEY_W] & ~ pre_w_mode) begin
+                w_mode <= ~w_mode;
+            end
+            pre_w_mode <= keys[`KEY_W];
+            pre_space <= keys[`KEY_SPACE];
         end
     end
+
 	 
 
-    //envo_ctrl_cmd[`CLR] = keys[`KEY_R];
-    assign envo_ctrl_cmd[`INC_V] = keys[`KEY_S_UP];
-    assign envo_ctrl_cmd[`DEC_V] = keys[`KEY_S_DOWN];
-    assign envo_ctrl_cmd[`CUR_USER_DATA] = keys[`KEY_E];
-    assign envo_ctrl_cmd[`CUR_USER_SET] = keys[`KEY_E];
-    assign envo_ctrl_cmd[`RANDOM] = keys[`KEY_R];
+    assign envo_ctrl_cmd[`CLR]           =  keys[`KEY_C];
+    assign envo_ctrl_cmd[`INC_V]         =  keys[`KEY_S_UP];
+    assign envo_ctrl_cmd[`DEC_V]         =  keys[`KEY_S_DOWN];
+    assign envo_ctrl_cmd[`CUR_USER_DATA] =  1'b1;
+    assign envo_ctrl_cmd[`CUR_USER_SET]  =  keys[`KEY_E];
+    assign envo_ctrl_cmd[`RANDOM]        =  keys[`KEY_R];
+    assign envo_ctrl_cmd[`PATTERN]       =  keys[`KEY_P];
 
     assign win_ctrl_cmd[`M_UP]    = keys[`KEY_AR_U];
     assign win_ctrl_cmd[`M_DOWN]  = keys[`KEY_AR_D];
@@ -71,7 +81,7 @@ module main_ctrl(
     assign win_ctrl_cmd[`M_RIGHT] = keys[`KEY_AR_R];
     assign win_ctrl_cmd[`Z_IN] = keys[`KEY_IN];
     assign win_ctrl_cmd[`Z_OUT] = keys[`KEY_OUT];
-    assign win_ctrl_cmd[`M_MODE] = 1'b0;// cur mode
+    assign win_ctrl_cmd[`M_MODE] = w_mode;// cur mode
 
     
 

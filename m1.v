@@ -19,28 +19,36 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 `include "defines.v"
-module addr_walkthrough(clk, rst_b, en, addrR, addrC, done);
-  parameter K = 7;
-  input clk, rst_b;
-  input en;
-  output wire [K-1:0] addrR;
-  output wire [K-1:0] addrC;
-  output wire done;
+module travers_boardm (
+    clk, rst,
+    enable,
+    addrC,
+    addrR,
+    finish
+);
+       parameter MAP_HEIGHT = 8;
+    parameter MAP_WIDTH = 8;
+    input clk,rst;
+    input enable;
+    output reg [7: 0] addrC; // the max width won't excced 128
+    output reg [7: 0] addrR;
+    output finish;
 
-  reg [2*K-1:0] count;  
+    assign finish = (addrC == MAP_WIDTH - 1) & (addrR == MAP_HEIGHT - 1);
 
-  assign addrR = count[2*K-1:K];
-  assign addrC = count[K-1:0];
-  //assign done = (count == (~{{2*K}{1'b0}}) );
-  assign done = (1'b1 == &count);
-  //assign done = `K_DEF;
-  always @(posedge clk, negedge rst_b) begin
-    if(~rst_b) count <= 'h0;
-    else if(en) begin
-      count <= count + 1'b1;
+    always @ (posedge clk or negedge rst) begin
+        if (~rst | finish) begin
+            addrC <= 8'b0;
+            addrR <= 8'b0;
+        end else if (enable) begin
+            if (addrC < MAP_WIDTH - 1) begin
+                addrC <= addrC + 8'b1;
+            end else if (addrC == MAP_WIDTH - 1) begin
+                addrC <= 8'b0;
+                addrR <= addrR + 8'b1;
+            end
+        end
     end
-  end
 
-//TODO Assertion check (walkthrough)
-// while ~enable, count ==0
+
 endmodule

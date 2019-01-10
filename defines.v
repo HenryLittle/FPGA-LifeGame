@@ -1,6 +1,8 @@
 `ifndef _GOL_HEADER_
 `define _GOL_HEADER_
 
+`define ADDR_WIDTH [7: 0]
+
 `define MODE_ENVOLVE 1
 `define MODE_EDIT 0
 
@@ -22,12 +24,14 @@
 `define CUR_USER_DATA 3
 `define CUR_USER_SET 4
 `define RANDOM 5
+`define PATTERN 6
 
 `define ENVO_STATE [2: 0]
 `define STATE_ENVOLVE 3'b000
 `define STATE_EDIT 3'b001
 `define STATE_RANDOM 3'b010
 `define STATE_CLEAR 3'b011
+`define STATE_PATTERN 3'b100
 
 `define KEYS [15: 0]
 `define KEY_AR_U    0
@@ -35,8 +39,8 @@
 `define KEY_AR_L    2
 `define KEY_AR_R    3
 `define KEY_W       4
-`define KEY_A       5
-`define KEY_S       6
+`define KEY_P       5
+`define KEY_C       6
 `define KEY_D       7
 `define KEY_IN      8
 `define KEY_OUT     9

@@ -31,16 +31,13 @@ module ps2_parse_test;
 
 	// Outputs
 	wire [15:0] keys;
-	wire ps2_posedge_state;
-	wire [2: 0] ps2_state_sampling;
+
 	// Instantiate the Unit Under Test (UUT)
 	ps2_parser uut (
 		.clk(clk), 
 		.ps2_byte(ps2_byte), 
 		.ps2_state(ps2_state), 
-		.keys(keys),
-		.ps2_posedge_state(ps2_posedge_state),
-		.ps2_state_sampling(ps2_state_sampling)
+		.keys(keys)
 	);
 
 	initial begin
@@ -51,11 +48,9 @@ module ps2_parse_test;
 
 		// Wait 100 ns for global reset to finish
 		#50;
-		ps2_byte = 8'h4C;
+		ps2_byte = 8'h29;
 		#40;
 		ps2_state = 1;
-		#520;
-		ps2_state = 0;
 		//ps2_byte = 0;
         
 		// Add stimulus here

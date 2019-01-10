@@ -360,10 +360,10 @@
 
 // endmodule
 
-
+`include "defines.v"
 // It works !! feel the tears in my heart
 module envolve_logic (
-    clk_envo, rst,
+    clk, clk_envo, rst,
     write_en,
     change_state,
     rAddrR, rAddrC,
@@ -372,15 +372,14 @@ module envolve_logic (
     read_data,
     test_bit
 );
-    parameter K = 6; // the layer indicator
     parameter MAP_WIDTH = 32; // 2 ^ 7
     parameter MAP_HEIGHT = 32; // 2 ^ 7
 
-    input clk_envo, rst;
+    input clk, clk_envo, rst;
     input write_en;
     input change_state;
-    input [K - 1: 0] rAddrR, rAddrC;
-    input [K - 1: 0] wAddrR, wAddrC;
+    input `ADDR_WIDTH rAddrR, rAddrC;
+    input `ADDR_WIDTH wAddrR, wAddrC;
     input write_data;
     output read_data;
 	 output test_bit;
@@ -388,6 +387,7 @@ module envolve_logic (
     reg map_index = 0;
     reg map_a [0: MAP_WIDTH - 1][0: MAP_HEIGHT - 1];
     reg map_b [0: MAP_WIDTH - 1][0: MAP_HEIGHT - 1];
+    reg pre_evo_clk [0: MAP_WIDTH - 1][0: MAP_HEIGHT - 1];
     wire [3: 0] neighbor_counter_a [0: MAP_WIDTH - 1][0: MAP_HEIGHT - 1];// neighbor count won't excced 8
     wire [3: 0] neighbor_counter_b [0: MAP_WIDTH - 1][0: MAP_HEIGHT - 1]; 
 
@@ -426,8 +426,35 @@ module envolve_logic (
                                                 + map_b[i][(j + 1) % MAP_HEIGHT]                                            // down
                                                 + map_b[(i + 1) % MAP_WIDTH][(j + 1) % MAP_HEIGHT];                         // down right
 
-                always @ (posedge clk_envo) begin
-                   if (change_state) begin
+                // always @ (posedge clk_envo) begin
+                //    if (change_state) begin
+                //         if (map_index == 0) begin
+                //         // read from map a and wirte to map b
+                //             //         else if (change_state) Next_State = (neighbor_num == 3'h3) || (Current_State & (neighbor_num == 2));
+                //             //map_b[i][j] <= (neighbor_counter_a[i][j] == 4'd3) || (map_a[i][j] & (neighbor_counter_a == 4'd2));
+                //             if (map_a[i][j]) begin
+                //                 map_b[i][j] <= neighbor_counter_a[i][j] == 2 | neighbor_counter_a[i][j] == 3;
+                //             end else begin
+                //                 map_b[i][j] <= neighbor_counter_a[i][j] == 3;
+                //             end
+                //         end else begin
+                //             //map_a[i][j] <= (neighbor_counter_b[i][j] == 4'd3) || (map_b[i][j] & (neighbor_counter_b == 4'd2));
+                //             if (map_b[i][j]) begin
+                //                 map_a[i][j] <= neighbor_counter_b[i][j] == 2 | neighbor_counter_b[i][j] == 3;
+                //             end else begin
+                //                 map_a[i][j] <= neighbor_counter_b[i][j] == 3;
+                //             end
+                //         end
+                //     end else begin
+                //         if (map_index == 0) begin
+                //             map_a[i][j] <= ((write_en) & (wAddrC == i) & (wAddrR == j)) ? write_data : map_a[i][j];
+                //         end else begin
+                //             map_b[i][j] <= ((write_en) & (wAddrC == i) & (wAddrR == j)) ? write_data : map_b[i][j];
+                //         end
+                //     end
+                // end
+                always @ (posedge clk) begin
+                    if (~ pre_evo_clk[i][j] & clk_envo & change_state) begin
                         if (map_index == 0) begin
                         // read from map a and wirte to map b
                             
@@ -447,12 +474,10 @@ module envolve_logic (
                             end
                         end
                     end else begin
-                        if (map_index == 0) begin
-                            map_a[i][j] <= ((write_en) & (wAddrC == i) & (wAddrR == j)) ? write_data : map_a[i][j];
-                        end else begin
-                            map_b[i][j] <= ((write_en) & (wAddrC == i) & (wAddrR == j)) ? write_data : map_b[i][j];
-                        end
+                        map_b[i][j] <= ((write_en) & (wAddrC == i) & (wAddrR == j)) ? write_data : map_b[i][j];
+                        map_a[i][j] <= ((write_en) & (wAddrC == i) & (wAddrR == j)) ? write_data : map_a[i][j];
                     end
+                    pre_evo_clk[i][j] = clk_envo;
                 end
             end
         end
