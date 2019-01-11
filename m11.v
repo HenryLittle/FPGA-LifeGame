@@ -95,7 +95,8 @@ module envolve_sub_top (
         .pattern_en(testbits[2])
     );
     // cur_x & y are the positions on the map (not relative to win_x & y)
-    cursor_ctrl cur_ctrl (
+    cursor_ctrl 
+    #(.MAP_WIDTH(MAP_WIDTH),.MAP_HEIGHT(MAP_HEIGHT)) cur_ctrl (
         .clk(clk), .rst(rst),
         .mode(mode),
         .win_ctrl_cmd(win_ctrl_cmd),

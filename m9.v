@@ -77,16 +77,6 @@ module envolve_display_ctrl (
                        & wi_px_bound_bm;
     assign in_disp_area = wi_draw_win;
 
-    // always @ (*) begin
-    //     if(wi_draw_win) begin
-    //         disp_value_RGB = 12'b0000_0000_1111;
-    //     end else begin
-    //         disp_value_RGB = 12'b1111_1111_0000;
-    //     end
-    // end
-
-    // draw the cells and cursor
-
     wire [7: 0] cell_rem_x_px, cell_rem_y_px;
     wire [7: 0] cell_width_px;
     calculate_cell cal_cell (
@@ -109,16 +99,14 @@ module envolve_display_ctrl (
     color_generator color_generator(cell_x, cell_y, color_life);
 
     always @ (*) begin
-        if (~ cursor_en & (cell_rem_x_px == 7'b0 | cell_rem_y_px == 7'b0 )) begin
+        if ( (cell_rem_x_px == 7'b0 | cell_rem_y_px == 7'b0 )) begin
             disp_value_RGB = 12'b0000_0000_0000;
+        end else if (cursor_en) begin
+            disp_value_RGB = 12'b0000_1111_0000;
         end else begin
-            if ((cell_x == cur_x) & (cell_y == cur_y)) begin
-                disp_value_RGB = 12'b0000_1111_0000;
-            end else begin
-                disp_value_RGB = (cell_state) ? (color_life): (12'b1111_1111_1111);
-            end
-            //disp_value_RGB = 12'b1111_1111_0000;
+            disp_value_RGB = (cell_state) ? (color_life): (12'b1111_1111_1111);
         end
+        //disp_value_RGB = 12'b1111_1111_0000;
     end
 endmodule
 

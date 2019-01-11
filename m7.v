@@ -32,6 +32,10 @@ module cursor_ctrl (
     cur_y,
     view_width
 );
+
+    parameter MAP_HEIGHT = 8;
+    parameter MAP_WIDTH = 8;
+
     parameter INITIAL_WIN_X = 0;
     parameter INITIAL_WIN_Y = 0;
     parameter INITIAL_R_CUR_X = 3;
@@ -82,8 +86,20 @@ module cursor_ctrl (
     reg [7: 0] cur_r_x; // r for relative
     reg [7: 0] cur_r_y;
     // cursor output
-    assign cur_x = win_x + cur_r_x;
-    assign cur_y = win_y + cur_r_y;
+    //assign cur_x = (win_x + cur_r_x) % MAP_WIDTH;
+    //assign cur_y = (win_y + cur_r_y) % MAP_HEIGHT;
+
+    divide #(8, 8) div_cur_x (
+        .numerator(win_x + cur_r_x),
+        .denominator(MAP_WIDTH),
+        .remain(cur_x)
+    );
+
+    divide #(8, 8) div_cur_y (
+        .numerator(win_y + cur_r_y),
+        .denominator(MAP_HEIGHT),
+        .remain(cur_y)
+    );
 
     // the boader
     wire `ADDR_WIDTH ul_bo;
