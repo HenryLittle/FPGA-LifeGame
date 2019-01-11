@@ -85,20 +85,23 @@ module cursor_ctrl (
 
     reg [7: 0] cur_r_x; // r for relative
     reg [7: 0] cur_r_y;
+    wire `ADDR_WIDTH cur_r_x_quo;
+    wire `ADDR_WIDTH cur_r_y_quo;
+    
     // cursor output
-    //assign cur_x = (win_x + cur_r_x) % MAP_WIDTH;
-    //assign cur_y = (win_y + cur_r_y) % MAP_HEIGHT;
+    assign cur_x = (cur_r_x_quo);
+    assign cur_y = (cur_r_y_quo);
 
     divide #(8, 8) div_cur_x (
-        .numerator(win_x + cur_r_x),
+        .numerator(cur_r_x),
         .denominator(MAP_WIDTH),
-        .remain(cur_x)
+        .remain(cur_r_x_quo)
     );
 
     divide #(8, 8) div_cur_y (
-        .numerator(win_y + cur_r_y),
+        .numerator(cur_r_y),
         .denominator(MAP_HEIGHT),
-        .remain(cur_y)
+        .remain(cur_r_y_quo)
     );
 
     // the boader

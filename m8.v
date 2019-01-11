@@ -59,7 +59,7 @@ module envolve_ctrl (
     ////////////////////////////////////////////////////////
     wire inc_v; 
     wire dec_v; 
-    wire cur_user_data;
+    wire cur_user_clr;
     wire cur_user_set;
     assign inc_v = envo_ctrl_cmd[`INC_V];
     assign dec_v = envo_ctrl_cmd[`DEC_V];
@@ -69,22 +69,24 @@ module envolve_ctrl (
     assign pattern_start = envo_ctrl_cmd[`PATTERN];
     assign cur_user_set = envo_ctrl_cmd[`CUR_USER_SET];
 
-    assign cur_user_data = envo_ctrl_cmd[`CUR_USER_DATA];
+    assign cur_user_clr = envo_ctrl_cmd[`CUR_USER_CLR];
     ///////////////////////////////////////////////////////
     wire random_out;
     wire pattern_out;
     wire `ADDR_WIDTH traversal_x;
     wire `ADDR_WIDTH traversal_y;
+
+
     
     ////////////
     // output //
     ////////////
-    assign write_en = clear_en | random_en | pattern_en | cur_user_set;
-    assign write_data = cur_user_set ? cur_user_data : 
-         (clear_en ? 1'b0 : (random_en ? random_out : (pattern_en ? pattern_out : 1'b0)));
+    assign write_en = clear_en | random_en | pattern_en | cur_user_set | cur_user_clr;
+    assign write_data = cur_user_set ? 1'b1 : (cur_user_clr ? 1'b0 :
+         (clear_en ? 1'b0 : (random_en ? random_out : (pattern_en ? pattern_out : 1'b0))));
     //assign write_data = pattern_out;
-    assign wAddrC = cur_user_set ? cur_x : traversal_x;
-    assign wAddrR = cur_user_set ? cur_y : traversal_y;
+    assign wAddrC = (cur_user_set | cur_user_clr) ? cur_x : traversal_x;
+    assign wAddrR = (cur_user_set | cur_user_clr) ? cur_y : traversal_y;
 
     // testing //
     //assign write_data = cur_user_data;

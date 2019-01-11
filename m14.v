@@ -88,7 +88,7 @@ module main_ctrl(
     assign envo_ctrl_cmd[`CLR]           =  keys[`KEY_C];
     assign envo_ctrl_cmd[`INC_V]         =  keys[`KEY_S_UP];
     assign envo_ctrl_cmd[`DEC_V]         =  keys[`KEY_S_DOWN];
-    assign envo_ctrl_cmd[`CUR_USER_DATA] =  1'b1;
+    assign envo_ctrl_cmd[`CUR_USER_CLR] =  keys[`KEY_D];
     assign envo_ctrl_cmd[`CUR_USER_SET]  =  keys[`KEY_E];
     assign envo_ctrl_cmd[`RANDOM]        =  keys[`KEY_R];
     assign envo_ctrl_cmd[`PATTERN]       =  keys[`KEY_P];

@@ -21,7 +21,7 @@
 `define CLR 0
 `define INC_V 1
 `define DEC_V 2
-`define CUR_USER_DATA 3
+`define CUR_USER_CLR 3
 `define CUR_USER_SET 4
 `define RANDOM 5
 `define PATTERN 6

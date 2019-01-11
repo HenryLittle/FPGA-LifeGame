@@ -92,19 +92,36 @@ module envolve_display_ctrl (
         .cell_rem_y_px(cell_rem_y_px),
         .cell_width_px(cell_width_px)
     );
-    // cell_x & y in this scope is already relative to the win_x & y
+
     wire cursor_en;
-    assign cursor_en = (mode == `MODE_EDIT) & (cell_x == cur_x) & (cell_y == cur_y);
+    assign cursor_en = (mode == `MODE_EDIT) & (cell_x_rem == cur_x) & (cell_y_rem == cur_y);
     wire [11: 0] color_life;
     color_generator color_generator(cell_x, cell_y, color_life);
 
+    wire `ADDR_WIDTH cell_x_rem;
+    wire `ADDR_WIDTH cell_y_rem;
+
+    divide #(8, 8) div_cell_cur_x (
+        .numerator(cell_x),
+        .denominator(MAP_WIDTH),
+        .remain(cell_x_rem)
+    );
+
+    divide #(8, 8) div_cell_cur_y (
+        .numerator(cell_y),
+        .denominator(MAP_HEIGHT),
+        .remain(cell_y_rem)
+    );
+
     always @ (*) begin
-        if ( (cell_rem_x_px == 7'b0 | cell_rem_y_px == 7'b0 )) begin
+        if ( ~cursor_en & (cell_rem_x_px == 7'b0 | cell_rem_y_px == 7'b0 )) begin
             disp_value_RGB = 12'b0000_0000_0000;
-        end else if (cursor_en) begin
-            disp_value_RGB = 12'b0000_1111_0000;
         end else begin
-            disp_value_RGB = (cell_state) ? (color_life): (12'b1111_1111_1111);
+            if ((mode == `MODE_EDIT) & (cell_x_rem == cur_x) & (cell_y_rem == cur_y)) begin
+                disp_value_RGB = 12'b0000_1111_0000;
+            end else begin
+                disp_value_RGB = (cell_state) ? (color_life): (12'b1111_1111_1111);
+            end
         end
         //disp_value_RGB = 12'b1111_1111_0000;
     end

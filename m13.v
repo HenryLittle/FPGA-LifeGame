@@ -44,7 +44,7 @@ module ps2_parser(
     assign keys[`KEY_AR_L  ] = count[22] & ps2_state & (ps2_byte == 8'h6B);
     assign keys[`KEY_AR_R  ] = count[22] & ps2_state & (ps2_byte == 8'h74);
     assign keys[`KEY_W     ] = ps2_posedge_state & (ps2_byte == 8'h1D);
-    assign keys[`KEY_D     ] = ps2_posedge_state & (ps2_byte == 8'h23);
+    assign keys[`KEY_D     ] = ps2_state & (ps2_byte == 8'h23);
     assign keys[`KEY_SPACE ] = ps2_posedge_state & (ps2_byte == 8'h29);
     assign keys[`KEY_IN    ] = ps2_state & (ps2_byte == 8'h43);
     assign keys[`KEY_OUT   ] = ps2_state & (ps2_byte == 8'h44);
