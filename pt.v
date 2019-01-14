@@ -51,7 +51,7 @@ module pt;
 
 		// Wait 100 ns for global reset to finish
 		#100;
-		addra = 0;
+		addra = 1;
         
 		// Add stimulus here
 

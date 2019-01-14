@@ -24,11 +24,11 @@ module m5_test;
 
 	// Inputs
 	reg [7:0] numerator;
-	reg [1:0] denominator;
+	reg [3:0] denominator;
 
 	// Outputs
 	wire [7:0] quotient;
-	wire [1:0] remain;
+	wire [3:0] remain;
 
 	// Instantiate the Unit Under Test (UUT)
 	divide #(8, 4) uut (
@@ -47,7 +47,15 @@ module m5_test;
 		#100;
 		numerator = 19;
 		denominator = 5;
-        
+		#100;
+		numerator = 3;
+		denominator = 8;
+      #100;
+		numerator = 20;
+		denominator = 5;
+		#100;
+		numerator = 0;
+		denominator = 5;
 		// Add stimulus here
 
 	end

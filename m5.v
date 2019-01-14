@@ -24,38 +24,31 @@ module divide (
     quotient,
     remain 
 );
-    parameter N_WIDTH = 8;
-    parameter D_WIDTH = 2;
+    parameter N_WIDTH = 10;
+    parameter D_WIDTH = 8;
 
     input  [N_WIDTH - 1: 0] numerator;
     input  [D_WIDTH - 1: 0] denominator;
     output reg [N_WIDTH - 1: 0] quotient;
     output reg [D_WIDTH - 1: 0] remain;
 
-    reg [N_WIDTH - 1: 0] res = 0;
-    reg [N_WIDTH - 1: 0] a1;
-    reg [D_WIDTH - 1: 0] b1;
-    reg [N_WIDTH - 1: 0] p1;
+    reg[D_WIDTH: 0] cmp[N_WIDTH - 1: 0];
+    reg[D_WIDTH: 0] sub[N_WIDTH - 1: 0];
+    
 
     // got it from the web with small modification
     // delete this later
     integer i;
     always @ (*) begin
-        a1 = numerator;
-        b1 = denominator;
-		  p1 = 1;
-        for (i = 0; i < N_WIDTH; i = i + 1) begin
-            p1 = {p1[N_WIDTH - 2: 0], a1[N_WIDTH - 1]};
-            a1[N_WIDTH - 1: 1] = a1[N_WIDTH - 2: 0];
-            p1 = p1  - b1;
-            if (p1[N_WIDTH - 1] == 1) begin
-                a1[0] = 0;
-                p1 = p1 + b1;
-            end else begin
-                a1[0] = 1;
-            end
+        cmp[N_WIDTH - 1] = {{D_WIDTH{1'b0}}, numerator[N_WIDTH - 1]};
+        for (i = N_WIDTH - 1; i > 0; i = i - 1) begin
+            sub[i] = cmp[i] - {1'b0, denominator};
+            quotient[i] = ~sub[i][D_WIDTH];
+            if (~sub[i][D_WIDTH]) cmp[i - 1] = {sub[i][D_WIDTH - 1: 0], numerator[i - 1]};
+            else cmp[i - 1] = {cmp[i][D_WIDTH - 1: 0], numerator[i - 1]};
         end
-        quotient = a1;
-        remain = p1;
+        sub[0] = cmp[0] - {1'b0, denominator};
+        quotient[0] = ~sub[0][D_WIDTH];
+        remain = (quotient[0]) ? sub[0][D_WIDTH - 1: 0] : cmp[0][D_WIDTH - 1: 0];
     end
 endmodule

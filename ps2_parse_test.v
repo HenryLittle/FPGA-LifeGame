@@ -48,7 +48,7 @@ module ps2_parse_test;
 
 		// Wait 100 ns for global reset to finish
 		#50;
-		ps2_byte = 8'h29;
+		ps2_byte = 8'h23;
 		#40;
 		ps2_state = 1;
 		//ps2_byte = 0;

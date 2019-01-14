@@ -34,7 +34,6 @@ module m2_test;
 	// Outputs
 	wire envolve_v;
 	wire [20:0] step;
-	wire [24:0] count;
 
 	// Instantiate the Unit Under Test (UUT)
 	envolve_v_ctrl uut (
@@ -44,8 +43,7 @@ module m2_test;
 		.inc_v(inc_v), 
 		.dec_v(dec_v), 
 		.envolve_v(envolve_v), 
-		.step(step), 
-		.count(count)
+		.test_p1(step)
 	);
 
 	initial begin

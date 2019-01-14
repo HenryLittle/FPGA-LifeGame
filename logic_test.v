@@ -70,6 +70,14 @@ module logic_test;
 		// Add stimulus here
 
 	end
+	always begin
+		clk = 1;#10;
+		clk = 0;#10;
+	end
+	always begin
+		change_state = 1;#100;
+		change_state = 1;#100;
+	end
       
 endmodule
 

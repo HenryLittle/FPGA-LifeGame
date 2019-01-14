@@ -69,7 +69,7 @@ module LifeGame(
     wire [6: 0] wAddrC, wAddrR;
     wire [2: 0] testbits;
 	wire [7: 0] view_width;
-    envolve_sub_top #( .MAP_WIDTH(16), .MAP_HEIGHT(16)) envolve(
+    envolve_sub_top #( .MAP_WIDTH(48), .MAP_HEIGHT(48)) envolve(
        .clk(clk), .rst(rst),
        .scan_x(pAddrC_X),
        .scan_y({1'b0, pAddrR_Y}),

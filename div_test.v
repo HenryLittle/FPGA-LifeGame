@@ -26,11 +26,11 @@ module div_test;
 
 	// Inputs
 	reg [7:0] nu;
-	reg [8:0] de;
+	reg [7:0] de;
 
 	// Outputs
 	wire [7:0] quotient;
-	wire [1:0] remain;
+	wire [7:0] remain;
 
 	// Instantiate the Unit Under Test (UUT)
 	divide #(8, 8)uut (

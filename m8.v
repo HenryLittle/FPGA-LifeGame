@@ -162,7 +162,7 @@ module envolve_v_ctrl (
     output wire envolve_v;
 		
 		output [24: 0] test_p1;
-		assign test_p1 = count;
+		assign test_p1 = step;
 		
     reg [24: 0] count;
     reg [20: 0] step;

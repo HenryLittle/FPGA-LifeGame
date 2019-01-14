@@ -31,7 +31,7 @@ module main_ctrl_sim;
 
 	// Outputs
 	wire [6:0] win_ctrl_cmd;
-	wire [7:0] envo_ctrl_cmd;
+	wire [6:0] envo_ctrl_cmd;
 	wire [7:0] view_width;
 	wire mode;
 	reg [7: 0] pby;
@@ -52,13 +52,17 @@ module main_ctrl_sim;
 	initial begin
 		// Initialize Inputs
 		clk = 0;
-		rst = 0;
+		rst = 1;
 		keys = 0;
+		psta = 0;
 
 		// Wait 100 ns for global reset to finish
-		#100;
+		#200;
 		rst = 1;
-		pby = 8'h29;
+		pby = 8'h23;
+		psta = 1;
+		#100;
+		psta = 0;
         
 		// Add stimulus here
 
